@@ -9,7 +9,7 @@ defmodule Coinsaver.Scrapers.Generic do
   end
 
   def do_fetch_data(url) do
-    case HTTPoison.get(url) do
+    case HTTPoison.get(url, [], ssl: [{:versions, [:"tlsv1.2"]}]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         {:ok, body}
 
