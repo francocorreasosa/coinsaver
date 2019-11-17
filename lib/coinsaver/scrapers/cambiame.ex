@@ -4,7 +4,7 @@ defmodule Coinsaver.Scrapers.Cambiame do
   @behaviour Coinsaver.Scrapers.Scraper
 
   # Cambiame.uy uses the same rate as BCU and applies
-  # a intermediation rate of 0.5% to each party.
+  # a intermediation fee of 0.5% to each party.
 
   @url "https://www.bcu.gub.uy/Paginas/Default.aspx"
 
