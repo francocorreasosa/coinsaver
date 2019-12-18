@@ -21,7 +21,7 @@ defmodule Coinsaver.Scrapers.ScrapingJob do
       Scrapers.OfertaCambioWeb
     ], fn x -> x.perform() |> process_results(x, query_id) end)
 
-    Rihanna.schedule({Coinsaver.Scrapers.ScrapingJob, :perform, [[]]}, in: :timer.seconds(1))
+    Rihanna.schedule({Coinsaver.Scrapers.ScrapingJob, :perform, [[]]}, in: :timer.minutes(5))
 
     :ok
   end
@@ -57,8 +57,8 @@ defmodule Coinsaver.Scrapers.ScrapingJob do
   end
 
   def process_error(query_id, error, reason) do 
-    
-    IO.puts("\n\n\nHTTP Timeout error in" <> query_id <> " " <> to_string(error) <> " " <> to_string(reason))
+    # TODO: make it right
+    IO.puts("HTTP Timeout error in" <> query_id <> " " <> to_string(error) <> " " <> to_string(reason))
   end
   
 end
