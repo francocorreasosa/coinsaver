@@ -6,7 +6,7 @@ defmodule Coinsaver.Exchange.Quote do
     field :date, :date
     field :kind, :string
     field :provider, :string
-    field :query_id, :integer
+    field :query_id, :string
     field :rate, :integer
 
     timestamps()
@@ -15,7 +15,7 @@ defmodule Coinsaver.Exchange.Quote do
   @doc false
   def changeset(quote, attrs) do
     quote
-    |> cast(attrs, [:provider, :kind, :rate, :date, :query_id])
-    |> validate_required([:provider, :kind, :rate, :date, :query_id])
+    |> cast(attrs, [:provider, :kind, :rate, :query_id])
+    |> validate_required([:provider, :kind, :rate, :query_id])
   end
 end

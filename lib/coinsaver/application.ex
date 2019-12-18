@@ -11,9 +11,10 @@ defmodule Coinsaver.Application do
       # Start the Ecto repository
       Coinsaver.Repo,
       # Start the endpoint when the application starts
-      CoinsaverWeb.Endpoint
+      CoinsaverWeb.Endpoint,
       # Starts a worker by calling: Coinsaver.Worker.start_link(arg)
       # {Coinsaver.Worker, arg},
+      {Rihanna.Supervisor, [postgrex: Coinsaver.Repo.config()]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

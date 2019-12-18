@@ -7,7 +7,7 @@ defmodule Coinsaver.Repo.Migrations.CreateQuotes do
       add :kind, :string
       add :rate, :integer
       add :date, :date
-      add :query_id, :integer
+      add :query_id, :string
 
       timestamps()
     end

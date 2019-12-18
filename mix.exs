@@ -44,7 +44,8 @@ defmodule Coinsaver.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:httpoison, "~> 1.4"},
-      {:floki, "~> 0.20.0"}
+      {:floki, "~> 0.20.0"},
+      {:rihanna, "~> 1.3"},
     ]
   end
 
