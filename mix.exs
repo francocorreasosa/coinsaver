@@ -45,7 +45,8 @@ defmodule Coinsaver.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:httpoison, "~> 1.4"},
       {:floki, "~> 0.20.0"},
-      {:rihanna, "~> 1.3"},
+      {:oban, "~> 0.12"},
+      {:number, "~> 1.0.1"},
     ]
   end
 

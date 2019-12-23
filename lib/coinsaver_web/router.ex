@@ -22,7 +22,5 @@ defmodule CoinsaverWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", CoinsaverWeb do
     pipe_through :api
-
-        resources "/quotes", QuoteController, except: [:new, :edit]
   end
 end

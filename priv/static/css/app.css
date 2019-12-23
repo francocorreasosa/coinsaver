@@ -1,0 +1,68 @@
+p {
+  margin: 0;
+}
+
+.home {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.bcu {
+  text-align: center;
+  margin: 2em 0;
+}
+
+.bcu .price {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.bcu .source {
+  margin: 1em;
+}
+
+p.pre {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table tr td {
+  line-height: 2;
+  border-bottom: 1px solid black;
+}
+
+table .rate {
+  text-align: right;
+  font-weight: bold;
+}
+
+.disclaimer {
+  border: 1px solid;
+  padding: 8px;
+  margin-top: 2em;
+}
+
+.disclaimer h2 {
+  font-size: 1em;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+}
+
+.disclaimer p {
+  text-align: justify;
+  font-size: 12px;
+}
+
+p.date {
+  text-align: center;
+  margin-top: 2em;
+}

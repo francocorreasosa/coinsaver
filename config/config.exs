@@ -29,5 +29,11 @@ config :phoenix, :json_library, Jason
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
 
-config :rihanna,
-  producer_postgres_connection: {Ecto, Coinsaver.Repo}
+config :coinsaver, Oban,
+  repo: Coinsaver.Repo,
+  prune: {:maxlen, 100_000},
+  queues: [default: 10, events: 50, media: 20]
+
+config :coinsaver, Oban, repo: Coinsaver.Repo, crontab: [
+  {"*/5 * * * *", Coinsaver.Scrapers.ScrapingJob},
+]

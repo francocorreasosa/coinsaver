@@ -14,7 +14,7 @@ defmodule Coinsaver.Application do
       CoinsaverWeb.Endpoint,
       # Starts a worker by calling: Coinsaver.Worker.start_link(arg)
       # {Coinsaver.Worker, arg},
-      {Rihanna.Supervisor, [postgrex: Coinsaver.Repo.config()]}
+      {Oban, Application.get_env(:coinsaver, Oban)},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

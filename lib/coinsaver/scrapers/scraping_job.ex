@@ -1,10 +1,11 @@
 defmodule Coinsaver.Scrapers.ScrapingJob do
-  @behaviour Rihanna.Job
+  use Oban.Worker, queue: "events", max_attempts: 3
 
   alias Coinsaver.Scrapers
 
-  def perform(arg) do
-    query_id =  Ecto.UUID.generate()
+  @impl Oban.Worker
+  def perform(args, job) do
+    query_id = job.id
 
     pmap([
       Scrapers.Aspen,
@@ -20,10 +21,6 @@ defmodule Coinsaver.Scrapers.ScrapingJob do
       Scrapers.Matriz,
       Scrapers.OfertaCambioWeb
     ], fn x -> x.perform() |> process_results(x, query_id) end)
-
-    Rihanna.schedule({Coinsaver.Scrapers.ScrapingJob, :perform, [[]]}, in: :timer.minutes(5))
-
-    :ok
   end
 
   # TODO: move to own module
@@ -43,7 +40,6 @@ defmodule Coinsaver.Scrapers.ScrapingJob do
   end
 
   def process_individual_result(type, rate_package, query_id) do
-    IO.inspect(query_id)
     provider = type |> to_string |> String.replace("Elixir.Coinsaver.Scrapers.", "") |> String.downcase
     %Coinsaver.Scrapers.ScrapingResult{kind: kind, rate: rate} = rate_package
     db_item = Coinsaver.Exchange.create_quote(%{
@@ -52,8 +48,6 @@ defmodule Coinsaver.Scrapers.ScrapingJob do
       provider: provider,
       query_id: query_id
     })
-
-    IO.inspect(db_item)
   end
 
   def process_error(query_id, error, reason) do 

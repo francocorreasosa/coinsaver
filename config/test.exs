@@ -16,3 +16,5 @@ config :coinsaver, CoinsaverWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :coinsaver, Oban, queues: false, prune: :disabled

@@ -1,35 +1,37 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
-</section>
+<section class="home">
+  <section class="bcu">
+    <p class="price"><%= format_price(@bcu_rate.rate) %></p>
+    <p class="source">Banco Central</p>
+  </section>
+  <p class="pre">
+   <%= if @kind == "sell" do %>
+   Para comprar un dólar tengo que pagar:
+   <% else %>
+   Al vender un dólar me van a dar:
+   <% end %>
+  </p>
+  <table>
+    <%= for q <- @quotes do %>
+      <tr>
+        <td><%= format_name(q.provider) %></td>
+        <td class="rate"><%= format_price(q.rate) %></td>
+      </tr>
+    <% end %>
+  </table>
+  <div class="disclaimer">
+    <h2>Disclaimer</h2>
+    <p>
+      Los valores expresados anteriormente son obtenidos
+      desde los respectivos sitios web de las instituciones
+      financieras y no constituyen una oferta por parte de
+      este sitio web. La información que se muestra en este
+      sitio es de acceso público y es actualizada cada cinco minutos.
+    </p>
+    <p>
+      No se incluyen las instituciones financieras que no exponen
+      sus valores de manera pública o requieren credenciales especificas.
+    </p>
+  </div>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-    </ul>
-  </article>
+  <p class="date">Actualizada: <%= @bcu_rate.inserted_at %> UTC</p>
 </section>

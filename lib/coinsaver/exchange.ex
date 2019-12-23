@@ -9,35 +9,6 @@ defmodule Coinsaver.Exchange do
   alias Coinsaver.Exchange.Quote
 
   @doc """
-  Returns the list of quotes.
-
-  ## Examples
-
-      iex> list_quotes()
-      [%Quote{}, ...]
-
-  """
-  def list_quotes do
-    Repo.all(Quote)
-  end
-
-  @doc """
-  Gets a single quote.
-
-  Raises `Ecto.NoResultsError` if the Quote does not exist.
-
-  ## Examples
-
-      iex> get_quote!(123)
-      %Quote{}
-
-      iex> get_quote!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_quote!(id), do: Repo.get!(Quote, id)
-
-  @doc """
   Creates a quote.
 
   ## Examples
@@ -56,40 +27,6 @@ defmodule Coinsaver.Exchange do
   end
 
   @doc """
-  Updates a quote.
-
-  ## Examples
-
-      iex> update_quote(quote, %{field: new_value})
-      {:ok, %Quote{}}
-
-      iex> update_quote(quote, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_quote(%Quote{} = quote, attrs) do
-    quote
-    |> Quote.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a Quote.
-
-  ## Examples
-
-      iex> delete_quote(quote)
-      {:ok, %Quote{}}
-
-      iex> delete_quote(quote)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_quote(%Quote{} = quote) do
-    Repo.delete(quote)
-  end
-
-  @doc """
   Returns an `%Ecto.Changeset{}` for tracking quote changes.
 
   ## Examples
@@ -100,5 +37,30 @@ defmodule Coinsaver.Exchange do
   """
   def change_quote(%Quote{} = quote) do
     Quote.changeset(quote, %{})
+  end
+
+  def get_last_job() do
+    (
+      from u in Oban.Job,
+      order_by: [desc: u.id],
+      limit: 1
+    ) |> Repo.one()
+  end
+
+  def get_quotes_from_job(job, kind) do
+    (
+      from q in Quote,
+        where: q.query_id == ^job.id and q.kind == ^kind and q.provider != "bcu",
+        order_by: [desc: q.rate]
+    ) |> Repo.all()
+  end
+
+  def get_bcu_rate() do
+    (
+      from q in Quote,
+        where: q.provider == "bcu",
+        order_by: [desc: q.inserted_at],
+        limit: 1
+    ) |> Repo.one()
   end
 end

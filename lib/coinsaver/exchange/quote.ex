@@ -6,7 +6,7 @@ defmodule Coinsaver.Exchange.Quote do
     field :date, :date
     field :kind, :string
     field :provider, :string
-    field :query_id, :string
+    field :query_id, :integer
     field :rate, :integer
 
     timestamps()
