@@ -28,10 +28,18 @@
       sitio es de acceso público y es actualizada cada cinco minutos.
     </p>
     <p>
+      En el caso de los bancos, los valores expresados representan el
+      valor pizarra y no el de homebanking.
+    </p>
+    <p>
+      El valor expresado para "Cambiame" es calculado a partir del valor
+      del Banco Central del Uruguay y la comisión de intermediación fijada por "Cambiame".
+    </p>
+    <p>
       No se incluyen las instituciones financieras que no exponen
       sus valores de manera pública o requieren credenciales especificas.
     </p>
   </div>
 
-  <p class="date">Actualizada: <%= @bcu_rate.inserted_at %> UTC</p>
+  <p class="date">Actualizada: <%= format_date(@bcu_rate.inserted_at) %> UTC</p>
 </section>

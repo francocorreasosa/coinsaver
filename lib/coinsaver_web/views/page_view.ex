@@ -24,4 +24,9 @@ defmodule CoinsaverWeb.PageView do
       name -> name
     end
   end
+
+  # TODO
+  def format_date(date) do
+    date
+  end
 end

@@ -47,6 +47,7 @@ defmodule Coinsaver.MixProject do
       {:floki, "~> 0.20.0"},
       {:oban, "~> 0.12"},
       {:number, "~> 1.0.1"},
+      {:timex, "~> 3.6.1"},
     ]
   end
 
