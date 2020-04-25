@@ -18,7 +18,7 @@ defmodule Coinsaver.Scrapers.BCU do
 
   defp extract_data(data) do
     data
-    |> Floki.find(".Cotizaciones table tr:nth-child(2) td:nth-child(3)")
+    |> Floki.find("#2225 > div > div > span:nth-child(2)")
     |> Floki.text()
     |> String.replace("\r\n", "")
     |> String.trim()
